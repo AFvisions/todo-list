@@ -11,14 +11,9 @@
         crossorigin="anonymous"></script>
 
 
-    <script>
-
+    <script>   
 
         let todoItems = []
-
-        /* Prevents the user from submitting item if due-date and todo-item are not filled out
-
-        */
        
         function handleSubmit() {
             const item = document.getElementById("todo-item").value;
@@ -56,11 +51,27 @@
             console.log(todoItems)
         }
 
+        /*
 
-        function handle
+        Fix the bug causing incorrect deletion of line-items, in the index and in the DOM. 
+        - Somethng about the first "Apple" array submitted will not delete in the index, as shown in the console. In addition, when there are only 2 line items, clicking the Delete button on the second line item WILL delete the first "Apple" submission and simply move the 2nd line item up. This happens with every additional 2 line items added if items are deleted in the order they were submitted. SOMETHING IS UP WITH THE FIRST TABLE ROW, it should not be affected. It behaves as a line item when all indexed items have been deleted, which CAN happen if only one item is submitted (Apple), and no others.
+        - 
+        
+        function 1
+        - Edit onClick makes data editable
+        E=> onEdit (itemNumber)
+                
+        function 2
+        - Edit button replaced by save button
 
+        function 3
+        - Save button clock updates table & array
 
+        Optional:
+        - Adjust the colors using bootstrap and improve design/css
+        - Add an ascending and descending button to swap line-item positions
 
+        */
 
 
     </script>
@@ -74,11 +85,11 @@
         <form>
             <div class="row">
                 <div class="col">
-                    <input type="text" class="form-control" id="todo-item" size=50 value="cha" />
+                    <input type="text" class="form-control" id="todo-item" size=50 value="0 Apple" />
                     <label class="form-label">To Do Item</label>
                 </div>
                 <div class="col">
-                    <input type="date" class="form-control" id="due-date" size=10 value="2022-02-02" />
+                    <input type="date" class="form-control" id="due-date" size=10 value="2022-02-19" />
                     <label class="form-label">Due By</label>
                 </div>
                 <div class="col">

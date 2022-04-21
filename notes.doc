@@ -1,0 +1,16 @@
+notes.doc
+
+    1. this is a global variable which consists of an array which is undefined for the purpose of storing objects that the user inputs  
+
+    1. handleSubmit: This function will receive the form data if form validation is successful (Is this React?)
+    2. the parentheses (round brackets) after "handleSubmit" reflect empty parameters that will fill when arguments are input
+    3. the curly bracket begins the instructions for the function {
+    4. "const" is the declaration, "item" is the variable. const represents a "general rule" that does not change while item represents list items the user will input.
+    5. "document" object represents the web page
+    6. using dot notation we access the objects property "getElementById('todo-item')" which is found in our HTML
+    7. the ".value".... is needed to show the input in the submitted line item, otherwise "[object HTMLInputElement]" is shown. So the .value gives us the HTMLInputElement. (Web APIs - https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)
+    8. we separate statements with semi-colons (;)
+    9. This line prevents the user from submitting item if todo-item have no input in the feild
+    10. the "if" statement executes a statement if a specified condition is "truthy" or if a condition is "falsy". In this case "If the item equals "", or if the item equals "undefined" a message via the console.log will appear.
+    11. "return false" executes halting of the function because the parameters were not met
+       
