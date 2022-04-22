@@ -35,17 +35,27 @@
             const b = todoTable.insertCell(1)
             const c = todoTable.insertCell(2)
             const d = todoTable.insertCell(3)
+            const e = todoTable.insertCell(4)
 
 
             a.innerHTML = itemNum
             b.innerHTML = item
             c.innerHTML = dueDate
-            d.innerHTML = '<input type="button" value="x" class="btn btn-danger" onclick="handleDelete(' + itemNum + ')"/>'
+            d.innerHTML = '<input type="button" value="x" class="btn btn-danger" onclick="handleDelete('+ itemNum +')"/>'
+            e.innerHTML = '<input type="button" value="Edit" class="btn btn-secondary" onclick="onEdit"/>'
         }
 
         function handleDelete(itemNumber) {
             console.log(itemNumber)
-            const itemIndex=parseInt(itemNumber) - 1
+            const itemIndex = parseInt(itemNumber) - 1
+            const todoTable = document.getElementById("todo-table").deleteRow(itemIndex)
+            todoItems.splice(itemIndex,1)
+            console.log(todoItems)
+        }
+
+        function handleEdit(itemnumber) {
+            console.log(itemNumber)
+            const itemIndex = parseInt(itemNumber) - 1
             const todoTable = document.getElementById("todo-table").deleteRow(itemIndex)
             todoItems.splice(itemIndex,1)
             console.log(todoItems)
@@ -54,7 +64,7 @@
         /*
 
         Fix the bug causing incorrect deletion of line-items, in the index and in the DOM. 
-        - Somethng about the first "Apple" array submitted will not delete in the index, as shown in the console. In addition, when there are only 2 line items, clicking the Delete button on the second line item WILL delete the first "Apple" submission and simply move the 2nd line item up. This happens with every additional 2 line items added if items are deleted in the order they were submitted. SOMETHING IS UP WITH THE FIRST TABLE ROW, it should not be affected. It behaves as a line item when all indexed items have been deleted, which CAN happen if only one item is submitted (Apple), and no others.
+        - The first "Apple" array submitted will not delete in the index, as shown in the console. In addition, when there are only 2 line items, clicking the Delete button on the second line item WILL delete the first "Apple" submission and simply move the 2nd line item up. This happens with every additional 2 line items added if items are deleted in the order they were submitted. SOMETHING IS UP WITH THE FIRST TABLE ROW, it should not be affected. It behaves as a line item when all indexed items have been deleted, which CAN happen if only one item is submitted (Apple), and no others.
         - 
         
         function 1
