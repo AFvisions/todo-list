@@ -37,7 +37,7 @@
             const d = todoTable.insertCell(3)
             const e = todoTable.insertCell(4)
 
-
+ 
             a.innerHTML = itemNum
             b.innerHTML = item
             c.innerHTML = dueDate
@@ -45,11 +45,14 @@
             e.innerHTML = '<input type="button" value="Edit" class="btn btn-secondary" onclick="onEdit"/>'
         }
 
+        
+
+        
         function handleDelete(itemNumber) {
             console.log(itemNumber)
             const itemIndex = parseInt(itemNumber) - 1
-            const todoTable = document.getElementById("todo-table").deleteRow(itemIndex)
-            todoItems.splice(itemIndex,1)
+            const todoTable = document.getElementById("todo-table").deleteRow(itemNumber) /* replaced itemIndex with itemNumber to remove line item*/
+            todoItems.splice(itemIndex, 1)
             console.log(todoItems)
         }
 
@@ -119,6 +122,7 @@
                     <th scope="col">Todo Item</th>
                     <th scope="col">Due Date</th>
                     <th scope="col">Actions</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
