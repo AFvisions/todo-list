@@ -1,5 +1,36 @@
 notes.doc
 
+/*
+
+        Fix the bug causing incorrect deletion of line-items, in the index and in the DOM. However the items do not change their Index, therefore when attempting to delete items in a various order the highest Index item will
+
+        WHen an item is delete, it's "line-item" needs to change to the corresponding line it's on. E.G. If I delete line item #4, all line items above #4 should decrease by 1 line-item.
+
+        - The first "Apple" array submitted will not delete in the index, as shown in the console. In addition, when there are only 2 line items, clicking the Delete button on the second line item WILL delete the first "Apple" submission and simply move the 2nd line item up. This happens with every additional 2 line items added if items are deleted in the order they were submitted. SOMETHING IS UP WITH THE FIRST TABLE ROW, it should not be affected. It behaves as a line item when all indexed items have been deleted, which CAN happen if only one item is submitted (Apple), and no others.
+
+
+        - 
+        
+        function 1
+        - Edit onClick makes data editable
+        E=> onEdit (itemNumber)
+                
+        function 2
+        - Edit button replaced by save button
+
+        function 3
+        - Save button clock updates table & array
+
+        Optional:
+        - Adjust the colors using bootstrap and improve design/css
+        - Add an ascending and descending button to swap line-item positions
+
+        */
+
+
+
+From the beginning of the code ---->
+
     1. this is a global variable which consists of an array which is undefined for the purpose of storing objects that the user inputs  
 
     1. handleSubmit: This function will receive the form data if form validation is successful (Is this React?)

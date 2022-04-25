@@ -11,56 +11,86 @@
         crossorigin="anonymous"></script>
 
 
-    <script>   
+    <script>
 
-        let todoItems = []
-       
-        function handleSubmit() {
+        let todoItems = new Map()
+
+        let itemIndex = 0
+
+        function createTodoItem() {
             const item = document.getElementById("todo-item").value;
+            document.
             if (item == "" || item == undefined) {
                 console.log("item is empty")
                 return false
             }
-            
+
             const dueDate = document.getElementById("due-date").value;
             if (dueDate == "" || dueDate == undefined) {
                 console.log("duedate is empty")
                 return false
             }
-            const itemNum = todoItems.push({ item, dueDate })
-            console.log(todoItems, itemNum)
-            const todoTable = document.getElementById("todo-table").insertRow(itemNum)
 
-            const a = todoTable.insertCell(0)
-            const b = todoTable.insertCell(1)
-            const c = todoTable.insertCell(2)
-            const d = todoTable.insertCell(3)
-            const e = todoTable.insertCell(4)
-
- 
-            a.innerHTML = itemNum
-            b.innerHTML = item
-            c.innerHTML = dueDate
-            d.innerHTML = '<input type="button" value="x" class="btn btn-danger" onclick="handleDelete('+ itemNum +')"/>'
-            e.innerHTML = '<input type="button" value="Edit" class="btn btn-secondary" onclick="onEdit"/>'
-        }
-
-        
-
-        
-        function handleDelete(itemNumber) {
-            console.log(itemNumber)
-            const itemIndex = parseInt(itemNumber) - 1
-            const todoTable = document.getElementById("todo-table").deleteRow(itemNumber) /* replaced itemIndex with itemNumber to remove line item*/
-            todoItems.splice(itemIndex, 1)
+            const itemKey = `item-${itemIndex}`
+            todoItems.set(itemKey, { item, dueDate })
+            itemIndex = itemIndex + 1
+            const itemNum = itemIndex
             console.log(todoItems)
+            renderTable();
         }
+
+        function renderTable() {
+            let tableHtml = `<table class="table" id="todo-table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Todo Item</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Actions</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+                <tbody>
+
+                </tbody>
+        </table> `
+            document.getElementById("div-todotable").innerHTML = tableHtml
+            let itemNum = 1
+            todoItems.forEach((mapValue, itemKey) => {
+                const todoTable = document.getElementById("todo-table").insertRow(itemNum)
+                itemNum = itemNum + 1
+                const a = todoTable.insertCell(0)
+                const b = todoTable.insertCell(1)
+                const c = todoTable.insertCell(2)
+                const d = todoTable.insertCell(3)
+                const e = todoTable.insertCell(4)
+
+
+                a.innerHTML = itemNum - 1
+                b.innerHTML = mapValue.item
+                c.innerHTML = mapValue.dueDate
+                d.innerHTML = '<input type="button" value="x" class="btn btn-danger" onclick="handleDelete(\'' + itemKey + '\')"/>'
+                e.innerHTML = '<input type="button" value="Edit" class="btn btn-secondary" onclick="onEdit"/>'
+                console.info(itemKey, mapValue)
+            })
+        }
+
+        function handleDelete(itemKey) {
+            todoItems.delete(itemKey)
+            console.log(todoItems)
+            renderTable();
+        }
+
+
+
+
+
 
         function handleEdit(itemnumber) {
             console.log(itemNumber)
             const itemIndex = parseInt(itemNumber) - 1
             const todoTable = document.getElementById("todo-table").deleteRow(itemIndex)
-            todoItems.splice(itemIndex,1)
+            todoItems.splice(itemIndex, 1)
             console.log(todoItems)
         }
 
@@ -107,30 +137,14 @@
                 </div>
                 <div class="col">
                     <input type="button" class="btn btn-primary" id="create-item" value="create-item"
-                        onclick="handleSubmit()" />
+                        onclick="createTodoItem()" />
                 </div>
             </div>
         </form>
 
+        <div id="div-todotable">
 
-
-
-        <table class="table" id="todo-table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Todo Item</th>
-                    <th scope="col">Due Date</th>
-                    <th scope="col">Actions</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-
-
+        </div>
 
 
 
