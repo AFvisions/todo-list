@@ -13,34 +13,34 @@
 
     <script>
 
-        let todoItems = new Map()
+        let todoItems = new Map()                                               // A global variable - let is declaration, todoItems is the named variable, operator =, new Map() creates a new map object
 
-        let itemIndex = 0
+        let itemIndex = 0                                                       // A global variable - itemIndex needs to = 0 because of Zero-Based Indexing
 
-        function createTodoItem() {
-            const item = document.getElementById("todo-item").value;
-            document.
-            if (item == "" || item == undefined) {
-                console.log("item is empty")
-                return false
+        function createTodoItem() {                                             // a function named createToDoItem() { instruction go here }
+            const item = document.getElementById("todo-item").value;            // here we are making a variable that = the value of an element Id'ed as "todo-item" in the document
+            document.                                                           // within the document... 
+            if (item == "" || item == undefined) {                              // if item equals " " or if item is undefined {further instruction}
+                console.log("item is empty")                                    // log in the console that "itme is emply"
+                return false                                                    // and return as false
             }
 
-            const dueDate = document.getElementById("due-date").value;
-            if (dueDate == "" || dueDate == undefined) {
-                console.log("duedate is empty")
-                return false
+            const dueDate = document.getElementById("due-date").value;          // we declare a variable named dueDate that = the value of an elemented "due-date", an html input field via bootstrap, from the DOM
+            if (dueDate == "" || dueDate == undefined) {                        // once again, if due-date equals " " OR is undefined... {instructions...
+                console.log("duedate is empty")                                 // log in the console that "duedate is empty"
+                return false                                                    // return as false
             }
 
-            const itemKey = `item-${itemIndex}`
-            todoItems.set(itemKey, { item, dueDate })
-            itemIndex = itemIndex + 1
-            const itemNum = itemIndex
-            console.log(todoItems)
-            renderTable();
-        }
+            const itemKey = `item-${itemIndex}`                                 // ` ` backticks allow for "multi-line strings, for string interpolation with embedded expressions, and for special constructs called tagged templates." - "template literal"
+                                                                                // placeholders delimited by $ --> ${expression} - 'not sure what the - before $ is? how does ' 
+            todoItems.set(itemKey, { item, dueDate })                           // a variable using dot notation to access the key method for the Map object "todoItems"   
+            itemIndex = itemIndex + 1                                           // itemIndex globally = 0, but within the function it needs to equal 1
+            const itemNum = itemIndex                                           // local variable named "itemNum" is equal to "itemIndex"
+            console.log(todoItems)                                              // todoItems will be logged in the console
+            renderTable();                                                      // renderTable calls it's function shown below which creates the HTML table
 
-        function renderTable() {
-            let tableHtml = `<table class="table" id="todo-table">
+        function renderTable() {                                                // a function named renderTable that creates an HTML table
+            let tableHtml = `<table class="table" id="todo-table">              
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -54,20 +54,20 @@
 
                 </tbody>
         </table> `
-            document.getElementById("div-todotable").innerHTML = tableHtml
-            let itemNum = 1
-            todoItems.forEach((mapValue, itemKey) => {
-                const todoTable = document.getElementById("todo-table").insertRow(itemNum)
-                itemNum = itemNum + 1
-                const a = todoTable.insertCell(0)
+            document.getElementById("div-todotable").innerHTML = tableHtml      // within the DOM target the ID'd element "div-todotable" and apply the tableHtml
+            let itemNum = 1                                                     // itemNum needs to = 1 for the line items...
+            todoItems.forEach((mapValue, itemKey) => {                          // using dot notation, the method forEach exectues the provided function once for each array element. "forEach((element, index) =>" What is mapValue???
+                const todoTable = document.getElementById("todo-table").insertRow(itemNum) // inserts row into the IDed html, which is a table. itemNum is parameter that = 1
+                itemNum = itemNum + 1                                           // itemNum which = 1, now also equals itself plus 1?
+                const a = todoTable.insertCell(0)                               // the cells within the row that are being inserted into the table
                 const b = todoTable.insertCell(1)
                 const c = todoTable.insertCell(2)
                 const d = todoTable.insertCell(3)
                 const e = todoTable.insertCell(4)
 
 
-                a.innerHTML = itemNum - 1
-                b.innerHTML = mapValue.item
+                a.innerHTML = itemNum - 1                                       // itemNum needed to be +1 for the Index, but now it's -1 for the HTML list item... maybe?
+                b.innerHTML = mapValue.item                                     // 
                 c.innerHTML = mapValue.dueDate
                 d.innerHTML = '<input type="button" value="x" class="btn btn-danger" onclick="handleDelete(\'' + itemKey + '\')"/>'
                 e.innerHTML = '<input type="button" value="Edit" class="btn btn-secondary" onclick="onEdit"/>'
